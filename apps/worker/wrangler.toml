@@ -1,0 +1,8 @@
+name = "streamspace-worker"
+main = "src/index.ts"
+compatibility_date = "2024-09-09"
+
+[vars]
+# SUPABASE_URL = ""
+# SUPABASE_ANON_KEY = ""
+# ALLOWED_ORIGIN = "*"
