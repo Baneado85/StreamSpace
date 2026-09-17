@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useQuery } from '@tanstack/react-query'
-import { API_URL, fetchWithAuth } from '../lib/api'
-import { Users, Video, Link as LinkIcon, Activity } from 'lucide-react'
+import { fetchWithAuth } from '../lib/api'
+import { Users, Video, Link as LinkIcon } from 'lucide-react'
 
 export default function AdminDashboard({ profile }: { profile: any }) {
   const [activeTab, setActiveTab] = useState('users')
