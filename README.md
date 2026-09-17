@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://stream-space-web-azure.vercel.app/vite.svg" alt="StreamSpace Logo" width="100"/>
+  <img src="./apps/web/public/logo.jpg" alt="StreamSpace Logo" width="150" style="border-radius: 20px;"/>
   <h1>StreamSpace</h1>
   <p><strong>Plataforma Privada de Streaming Académico con Protección Anti-Piratería</strong></p>
 </div>
