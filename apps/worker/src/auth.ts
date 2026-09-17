@@ -3,8 +3,8 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 export type Env = {
   Bindings: {
-    SUPABASE_URL: string
-    SUPABASE_ANON_KEY: string
+    VITE_SUPABASE_URL: string
+    VITE_SUPABASE_ANON_KEY: string
     SUPABASE_SERVICE_ROLE_KEY: string
     VDOCIPHER_API_SECRET: string
     ALLOWED_ORIGIN: string
@@ -24,7 +24,7 @@ export const authMiddleware = async (c: Context<Env>, next: Next) => {
   }
 
   const token = authHeader.split(' ')[1]
-  const supabase = createClient(c.env.SUPABASE_URL, c.env.SUPABASE_ANON_KEY)
+  const supabase = createClient(c.env.VITE_SUPABASE_URL, c.env.VITE_SUPABASE_ANON_KEY)
   
   const { data: { user }, error } = await supabase.auth.getUser(token)
   
@@ -33,7 +33,11 @@ export const authMiddleware = async (c: Context<Env>, next: Next) => {
   }
 
   // Get profile using service role to bypass RLS for checking role
-  const supabaseAdmin = createClient(c.env.SUPABASE_URL, c.env.SUPABASE_SERVICE_ROLE_KEY)
+  if (!c.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return c.json({ error: 'Falta configurar SUPABASE_SERVICE_ROLE_KEY en el .env' }, 500)
+  }
+
+  const supabaseAdmin = createClient(c.env.VITE_SUPABASE_URL, c.env.SUPABASE_SERVICE_ROLE_KEY)
   const { data: profile, error: profileError } = await supabaseAdmin
     .from('profiles')
     .select('*')
